@@ -6,3 +6,5 @@ Point &amp; click game in PHP
 ![](https://i.imgur.com/xLbpeXw.jpeg)
 
 ![](https://i.imgur.com/pZCJJh4.jpeg)
+
+fix it using $_SESSION
