@@ -1,8 +1,26 @@
+<?php
+    session_start();
+    if (isset($_SESSION['x'])) {
+        $x = $_SESSION['x'];
+        // echo($_SESSION['x']);
+    }
+    else {
+        $x = 0;
+        $_SESSION['x'] = $x;
+    }
+
+    if (isset($_POST['restart'])) {
+        $_SESSION['x'] = 0; 
+        header('Location: game.php'); 
+        exit;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="item-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escape Room</title>
     <link rel="stylesheet" href="style.css">
@@ -13,14 +31,9 @@
             <h1>Escape Room</h1>
 
             <?php
-                if (isset($_GET['x'])) {
-                    $x = $_GET['x'];
-                }
-                else { 
-                    $x = 0;
-                }
+                
                 if ($x==1) { 
-                    echo "<img src='img/escape-room2.png' alt='escape-room2' usemap='#image-map2' />";
+                    echo "<img src='img/escape-room1.png' alt='escape-room1' usemap='#image-map1' />";
                     
                     echo "<div class='found'>";
                         echo "<h1 class='message'>You have found the first key and a penknife!</h1>";
@@ -33,7 +46,7 @@
                         </script>";
                 }
                 else if ($x==2) {
-                    echo "<img src='img/escape-room3.png' alt='escape-room3' usemap='#image-map3' />";
+                    echo "<img src='img/escape-room2.png' alt='escape-room2' usemap='#image-map2' />";
 
                     echo "<div class='found'>";
                         echo "<h1 class='message'>You have found the second key and a lighter!</h1>";
@@ -46,7 +59,7 @@
                         </script>";
                 }
                 else if ($x==3) {
-                    echo "<img src='img/escape-room4.png' alt='escape-room4' usemap='#image-map4' />";
+                    echo "<img src='img/escape-room3.png' alt='escape-room3' usemap='#image-map3' />";
 
                     echo "<div class='found'>";
                         echo "<h1 class='message'>You have found the last key!</h1>";
@@ -59,10 +72,10 @@
                         </script>";
                 }
                 else if ($x==4) {
-                    echo "<img src='img/escape-room5.png' alt='escape-room5' usemap='#image-map5' />";
+                    echo "<img src='img/escape-room4.png' alt='escape-room4' usemap='#image-map4' />";
                 }
                 else if ($x==5) {
-                    echo "<img src='img/escape-room6.png' alt='escape-room6' usemap='#image-map6' />";
+                    echo "<img src='img/escape-room5.png' alt='escape-room5' usemap='#image-map5' />";
                 }
                 else {
                     echo "<img src='img/escape-room.png' alt='escape-room' usemap='#image-map' />";
@@ -75,7 +88,7 @@
             </map>
 
             <!-- SECOND DRAWER AND BOXES-->
-            <map name="image-map2">
+            <map name="image-map1">
                 <area alt="drawer2" title="drawer2" href="drawer2.php" coords="557,457,610,448,610,479,558,488" shape="poly">
                 <area alt="drawer3" title="drawer3" href="" class="padlock" onclick="showMessage()" coords="557,428,556,457,609,449,610,433,585,436" shape="poly">
                 <area alt="box" title="box" href="box.php" class="padlock" onclick="showMessage()" coords="109,450,111,497,177,508,275,469,272,429,214,427" shape="poly">
@@ -85,7 +98,7 @@
             </map>
 
             <!-- UNLOCK BOX WITH THE KEY -->
-            <map name="image-map3">
+            <map name="image-map2">
                 <area alt="drawer3" title="drawer3" href="" class="padlock" onclick="showMessage()" coords="557,428,556,457,609,449,610,433,585,436" shape="poly">
                 <area alt="box" title="box" href="box.php" coords="109,450,111,497,177,508,275,469,272,429,214,427" shape="poly">
                 <area alt="box2" title="box2" href="" class="padlock" onclick="showMessage()" coords="819,332,814,349,813,379,910,386,911,334" shape="poly">
@@ -94,25 +107,25 @@
             </map>
 
             <!-- UNLOCK WINDOW -->
-            <map name="image-map4">
+            <map name="image-map3">
                 <area alt="drawer3" title="drawer3" href="" class="padlock" onclick="showMessage()" coords="557,428,556,457,609,449,610,433,585,436" shape="poly">
-                <area alt="box2" title="box2" href="" class="padlock" onclick="showMessage()" coords="819,332,814,349,813,379,910,386,911,334" shape="poly">
+                 <area alt="box2" title="box2" href="" class="padlock" onclick="showMessage()" coords="819,332,814,349,813,379,910,386,911,334" shape="poly">
                 <area alt="box3" title="box3" href="" class="padlock" onclick="showMessage()" coords="639,364,636,427,729,435,728,367" shape="poly">
                 <area alt="window" title="window" href="window.php" coords="825,96,824,267,896,264,897,273,912,274,921,259,947,258,946,61,937,55" shape="poly">
             </map>
 
             <!-- UNLOCK WHISKEY & OUTSIDE -->
-            <map name="image-map5">
+            <map name="image-map4">
                 <area alt="whiskey" title="whiskey" href="whiskey.php" coords="148,153,147,172,141,175,141,207,153,210,155,155" shape="poly">
                 <area alt="freedom" title="freedom" href="freedom.php" coords="825,96,824,267,896,264,897,273,912,274,921,259,947,258,946,61,937,55" shape="poly">
             </map>
             
             <!-- UNLOCK OUTSIDE -->
-            <map name="image-map6">
-                <area alt="freedom" title="freedom" href="freedom.php?x=<?php echo $x;?>" coords="825,96,824,267,896,264,897,273,912,274,921,259,947,258,946,61,937,55" shape="poly">
+            <map name="image-map5">
+                <area alt="freedom" title="freedom" href="freedom.php" coords="825,96,824,267,896,264,897,273,912,274,921,259,947,258,946,61,937,55" shape="poly">
             </map>
 
-            <script>
+             <script>
                 const padlocks = document.getElementsByClassName("padlock");
                 for (let i = 0; i < padlocks.length; i++) {
                     padlocks[i].addEventListener("click", showMessage);
@@ -127,7 +140,7 @@
                         h1Element.style.display = "none";
                     }, 2000);
                 }
-            </script>  
+            </script> 
 
             <table>
                 <tr>
@@ -172,7 +185,13 @@
                     <td></td>
                 </tr>
             </table> 
-            <h1><a href="game.php">Restart</a></h1>  
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table> 
+    
+            <h1><a href="restart.php">Restart</a></h1>  
         </div> 
     </div>
 </body>
