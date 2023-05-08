@@ -1,5 +1,6 @@
 <?php
 	session_start();
-	$_SESSION['item1']=3;
+	$_SESSION['x']=5;
+	header('Location: game.php');
+	exit;
 ?>
-<meta http-equiv="refresh" content="0; url=game.php?x=5">
