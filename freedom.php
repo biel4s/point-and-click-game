@@ -1,3 +1,14 @@
+<?php
+    session_start();
+    if (isset($_SESSION['x'])) {
+        $x = $_SESSION['x'];
+    } else {
+        $x = 0;
+        $_SESSION['x'] = $x;
+        // var_dump($_SESSION);
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,22 +22,15 @@
     <div class="container">
         <div class="content">
             <?php
-                if (isset($_GET['x'])) {
-                    $x = $_GET['x'];
-                    if ($x == 5) {
-                        echo "<h1>Congratulations! You managed to escape from the escape room with some bonus!</h1>";
-                        echo "<img src='img/freedom2.png' class='freedom' alt='freedom' />";
-                    } else {
-                        echo "<h1>Congratulations! You managed to escape from the escape room!</h1>";
-                        echo "<img src='img/freedom.png' class='freedom' alt='freedom' />";
-                    }
-                }
-                else {
+                if ($x == 5) {
+                    echo "<h1>Congratulations! You managed to escape from the escape room with some bonus!</h1>";
+                    echo "<img src='img/freedom2.png' class='freedom' alt='freedom' />";
+                } else {
                     echo "<h1>Congratulations! You managed to escape from the escape room!</h1>";
                     echo "<img src='img/freedom.png' class='freedom' alt='freedom' />";
                 }
             ?>
-            <h1><a href="game.php">Restart</a></h1>
+            <h1><a href="restart.php">Restart</a></h1>
         </div>
     </div>
 </body>
